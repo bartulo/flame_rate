@@ -35,7 +35,7 @@ diagonal_factor = .707
 length = 650. # meters; domain extends from -length to +length
 # A grid size of 50 x 50 ist much too small to see the correct result. For a better result, set the size to 200 x 200. That computation would, however, be far too long for the Web-based development environment. You may want to run it offline.
 size = 120 # number of points per dimension of the grid
-dx = 2. * length / size
+dx = 2. * length / size # 10
 # Pick a time step below the threshold of instability
 h = 0.2 * dx ** 2 / diffusion_coefficient # s
 end_time = 30. * 60. # s
@@ -89,12 +89,11 @@ def wildfire():
 				
 				if data[j][i] == 0:
 					if temperatures_new[j][i] > ignition_temperature:
-						print i, j
 						data[j][i] = step * 65530 / (num_steps + 10)
 		temperatures_old, temperatures_new = temperatures_new, temperatures_old
 		wood_old, wood_new = wood_new, wood_old
 
-	img = TIFF.open('p3.tiff', mode='w')
+	img = TIFF.open('p4.tiff', mode='w')
 	img.write_image(data)
 	img.close()
 	return temperatures_old
